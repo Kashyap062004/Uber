@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  auth-service:
+    build:
+      context: ./auth-service
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URI=mongodb+srv://Uber:Somnath@2025@cluster0.blkc3iu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+      - JWT_SECRET=supersecret
+    depends_on:
+      - mongo
+    restart: always
+
+  mongo:
+    image: mongo:6
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    restart: always
+
+volumes:
+  mongo-data:
+
+# Ride
+
+  ride-service:
+    build:
+      context: ./ride-service
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5001"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/ridesDB
+    depends_on:
+      - mongo
+    restart: always
