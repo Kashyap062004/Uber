@@ -53,7 +53,7 @@ main/
 ### 1️⃣ Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/uber-clone.git
+git clone https://github.com/Kashyap062004/Uber.git
 cd uber-clone/main
 ```
 
